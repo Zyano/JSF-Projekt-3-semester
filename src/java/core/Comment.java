@@ -29,6 +29,7 @@ public class Comment {
         }
     }
     
+    @Override
     public String toString() {
         return user.getUserName()+": " + text;
     }

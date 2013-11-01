@@ -24,51 +24,89 @@ public class CategoryBean implements Serializable{
     private Message currentlySelectedMessage;
     @Inject
     private UserBean user;
+    
+    /**
+     * creates the message and comment lists.
+     */
     public CategoryBean() {
         comments = new ArrayList<>();
         messages = new ArrayList<>();
     }
     
+    /**
+     * Creates a comment on the currently selected message(news post).
+     * @param text 
+     */
     public void addComment(String text) {
         Comment c = new Comment(user.getUser(), text);
         currentlySelectedMessage.addComment(c);
     }
     
-    public void addMessage(String text) {
-        category.addMessage(new Message(user.getUser(), text));
+    /**
+     * adds a message(news post) to the currently selected category. admin use case?
+     * @param text 
+     */
+    public void addMessage(String title, String text) {
+        category.addMessage(new Message(user.getUser(), title, text));
     }
     
+    /**
+     * for admin usecase if a comment is deleted.
+     * @param comments 
+     */
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
     
+    /**
+     * Admin usecase for deletion of messages(news posts) 
+     * @param messages 
+     */
     public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
     
+    /**
+     * Sets the currently selected category.
+     * @param category
+     */
     public void setCategory(Category category) {
         this.category = category;
     }
     
+    /**
+     * Gets all the comments on a given message(news post)
+     * @return List<Comment>
+     */
     public List<Comment> getComments() {
+        System.out.println(comments);
         return comments;
     }
     
+    /**
+     * Gets the Messages (news posts)
+     * @return List<Message>
+     */
     public List<Message> getMessages() {
         return messages;
     }
     
+    /**
+     * Does not appear to have a usecase. delete ?
+     * @return Category
+     */
     public Category getCategory() {
         return category;
     }
     
     /**
-     * sendes the user to category.xhtml. showing all messages from the selected category.
+     * Sends the user to category.xhtml. showing all messages from the selected category.
      * @param cat
      * @return category
      */
     public String selectedCategory(Category cat) {
         this.category = cat;
+        this.messages = category.getMessages();
         return "category";
     }
 
@@ -79,10 +117,47 @@ public class CategoryBean implements Serializable{
      */
     public String selectedMessage(Message msg) {
         this.currentlySelectedMessage = msg;
+        this.comments = msg.getComments();
         return "message";
     }
 
+    /**
+     * Should be changed to return the currently selected Category and the amount of submessages.
+     * @return 
+     */
     public String categoryToString() {
         return category.toString();
+    }
+    /**
+     * Description of the category selected
+     * @return String
+     */
+    public String getCategoryDesc(){
+        return category.getDesc();
+    }
+    
+    /**
+     * Tittle of the Category currently selected.
+     * @return String
+     */
+    public String getCategoryTittle(){
+        return category.getTitle();
+    }
+    
+    public String getMessageUserAndTitle(Message msg) {
+        return msg.getUsernameTitleToString();
+    }
+    
+    public String getMessageTitle() {
+        return currentlySelectedMessage.getTitle();
+    }
+    
+    public String getMessageText() {
+        return currentlySelectedMessage.getText();
+    }
+
+    public String deleteComment(Comment comment) {
+        currentlySelectedMessage.removeComment(comment);
+        return "";
     }
 }

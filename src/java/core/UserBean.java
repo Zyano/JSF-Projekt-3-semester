@@ -36,4 +36,8 @@ public class UserBean implements Serializable{
         service.addUser(user);
         return login();
     }
+    
+    public boolean isAdmin() {
+        return user.isAdmin();
+    }
 }

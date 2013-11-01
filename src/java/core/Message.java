@@ -6,13 +6,16 @@ import java.util.List;
 public class Message {
     
     private String text;
+    // title for use on the category page so we don't get the entire article on the category page but rather when you select it!
+    private String title;
     
     private User user;
     private List<Comment> comments;
     
-    public Message(User user, String text) {
+    public Message(User user, String title, String text) {
         comments = new ArrayList<>();
         this.user = user;
+        this.title = title;
         this.text = text;
     }
     
@@ -37,6 +40,18 @@ public class Message {
     public List<Comment> getComments() {
         return comments;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
     
     public void addComment(Comment comment) {
         if (!this.comments.contains(comment)) {
@@ -57,7 +72,12 @@ public class Message {
         }
     }
     
+    @Override
     public String toString() {
         return user.getUserName()+": " +text;
+    }
+    
+    public String getUsernameTitleToString() {
+        return user.getUserName()+": " + title;
     }
 }

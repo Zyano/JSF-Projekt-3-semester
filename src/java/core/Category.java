@@ -1,5 +1,6 @@
 package core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Category {
@@ -9,6 +10,7 @@ public class Category {
     private List<Message> messages;
 
     public Category(String title, String desc) {
+        messages = new ArrayList<>();
         this.title = title;
         this.desc = desc;
     }
@@ -32,6 +34,10 @@ public class Category {
                 m.removeAllComments();
             }
         }
+    }
+    
+    public List<Message> getMessages() {
+        return messages;
     }
 
     public String getTitle() {
