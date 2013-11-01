@@ -20,19 +20,37 @@ public class Service {
     public Service() {
         users = new ArrayList<>();
         categories = new ArrayList<>();
+        createUsers();
+        createData();
+        
+        System.out.println(categories);
+    }
+    
+    private void createUsers() {
         users.add(new User("mark", "password", false));
         users.add(new User("mike", "mike", true));
         users.add(new User("lizette","adhd",false));
         users.add(new User("Christine", "moew", false));
-        categories.add(new Category("MIKE IS A FAG", "MIKE IS A MASSIVE FAG"));
-        categories.add(new Category("SHIT", "ALL ABOUT SHTI"));
-        System.out.println(categories);
+    }
+    
+    private void createData() {
+        Category c = new Category("IT Realted","It related news, from NSA spying to game releases");
+        Category c2 = new Category("Random", "Anything goes here - random");
+        categories.add(c);
+        categories.add(c2);
+        Message m = new Message(users.get(0), "Fønik Computers og fortrydelsesretten", "Artikel kommer her");
+        Message m2 = new Message(users.get(1), "MAC ER BEDRE END PC, DERP!", "Artikel kommer her");
+        c.addMessage(m);
+        c.addMessage(m2);
+        Comment cm = new Comment(users.get(3), "Unrelated exception");
+        m.addComment(cm);
+        
     }
     
     public User getValidUser(User user) {
         User us = null;
         for(User u:users) {
-            if(u.getUserName().equals(user.getUserName()) && u.getPassword().equals(user.getPassword())) {
+            if((u.getUserName().toLowerCase()).equals((user.getUserName().toLowerCase())) && u.getPassword().equals(user.getPassword())) {
                 us = u ;
                 break;
             }
@@ -55,7 +73,7 @@ public class Service {
             users.add(user);
         }
     }
-
+    
     public List<Category> getCategories() {
         return categories;
     }
