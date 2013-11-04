@@ -8,13 +8,13 @@
     <h:body>
         <h:form>
             <h:outputText value="Name/Title: "/>
-            <h:inputText value="#{service.newCategoryTitle}" />
+            <h:inputText value="#{category.newCategoryTitle}" />
             <br/>
             <h:outputText value="Description: " />
             <br/>
-            <h:inputTextarea value="#{service.newCategoryDesc}" />
+            <h:inputTextarea value="#{category.newCategoryDesc}" />
             <br/>
-            <h:commandButton value="Create" action="#{userBean.createNewCategory()}" />
+            <h:commandButton value="Create" action="#{category.createNewCategory()}" />
         </h:form>
     </h:body>
 </html>
