@@ -6,31 +6,31 @@ public class Comment {
     private String text;
 
     public Comment(User user, String text) {
-        this.user = user;
-        this.text = text;
+	this.user = user;
+	this.text = text;
 
     }
 
     public User getUser() {
-        return user;
+	return user;
     }
 
     public String getText() {
-        return text;
+	return text;
     }
 
     public void setText(String text) {
-        this.text = text;
+	this.text = text;
     }
 
     public void setUser(User user) {
-        if (this.user != user) {
-            this.user = user;
-        }
+	if (this.user != user) {
+	    this.user = user;
+	}
     }
-    
+
     @Override
     public String toString() {
-        return user.getUserName()+": " + text;
+	return text;
     }
 }
