@@ -27,7 +27,7 @@
 		<br />
 		<br />
 		<h:form rendered="#{userBean.admin}">
-		    <h1>ADMIN PANEL <small>Control the midgets here</small></h1>
+		    <h1>Admin panel <small>Control the midgets here</small></h1>
 		    <h:dataTable value="#{service.users}" var="user" >
 			<h:column>
 			    <h:commandLink action="#{service.removeUser(user)}" value="Delete #{user.userName}" rendered="#{userBean.isCurrentUser(user)}"/>
@@ -39,8 +39,7 @@
 	<div id="bottom">
 	    <div class="container">
 		<h:form>
-		    <h:commandButton action="createCategory" value="Create a new category" p:class="btn btn-success" />&nbsp;
-		    <h:commandButton action="welcome" value="BACK THE FUCK OFF" p:class="btn btn-warning" />
+		    <h:commandButton action="createCategory" value="Create a new category" p:class="btn btn-success" />
 		</h:form>
 	    </div>
 	</div>
