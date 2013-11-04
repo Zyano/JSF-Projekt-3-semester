@@ -67,9 +67,8 @@ public class Service {
     
     public void removeUser(User user) {
         if(users.contains(user)) {
-            users.remove(user);
             deleteUser(user);
-            
+            users.remove(user);
         }
     }
     
@@ -96,31 +95,41 @@ public class Service {
             
         }
     }
-
+    
     /**
      * Triple nested while loop! OP
      * @param user
      */
     public void deleteUser(User user) {
+        System.out.println(users);
+        System.out.println(user);
+        System.out.println("Started delete user");
         if(users.contains(user)) {
             int i = 0;
-            while(i<categories.size()-1) {
+            System.out.println("delete user: " + user);
+            while(i<categories.size()) {
                 Category c = categories.get(i);
+                System.out.println("Checking Category: " + c);
                 int j = 0;
                 if(c.getUser().equals(user)) {
                     removeCategory(c);
+                    System.out.println("called RemoveCategory");
                 }  else {
-                    while(j<c.getMessages().size()-1) {
+                    while(j<c.getMessages().size()) {
                         int k = 0;
                         Message m = c.getMessages().get(j);
+                        System.out.println("Checking messages: " + m);
+                        System.out.println("");
                         if(m.getUser().equals(user)) {
                             c.removeMessage(m);
+                            System.out.println("called RemoveCategory");
                         } else {
-
-                            while(k<m.getComments().size()-1) {
+                            while(k<m.getComments().size()) {
                                 Comment cc = m.getComments().get(k);
+                                System.out.println("Checking comment: " + cc);
                                 if(cc.getUser().equals(user)) {
                                     m.removeComment(cc);
+                                    System.out.println("Removing comment");
                                 }
                                 k++;
                             }
