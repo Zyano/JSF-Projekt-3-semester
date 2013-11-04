@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="SADP_Mini_projekt" default="default" basedir=".">
-    <description>Builds, tests, and runs the project SADP Mini projekt.</description>
+<project name="SADP_mini_projekt" default="default" basedir=".">
+    <description>Builds, tests, and runs the project SADP mini projekt.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 

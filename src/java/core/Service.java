@@ -132,4 +132,24 @@ public class Service {
             }
         }
     }
+    
+    public Category createCategory(User user, String title, String desc) {
+        Category c = new Category(user, title, desc);
+        addCategory(c);
+        return c;
+    }
+    
+    public Message createMessage(Category cat, User user, String title, String text) {
+        Message m = new Message(user, title, text);
+        cat.addMessage(m);
+        return m;
+    }
+    
+    public Comment createComment(Message message, User user, String text) {
+        Comment c = new Comment(user, text);
+        message.addComment(c);
+        return c;
+    }
+    
+    
 }

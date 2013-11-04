@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedProperty;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,7 +18,6 @@ import javax.inject.Named;
 public class CategoryBean implements Serializable{
     private List<Comment> comments;
     private List<Message> messages;
-    @ManagedProperty(value = "#{param.cat}")
     private Category category;
     private Message currentlySelectedMessage;
     @Inject
@@ -34,6 +32,9 @@ public class CategoryBean implements Serializable{
     // create Category
     private String newCategoryTitle;
     private String newCategoryDesc;
+    
+    // create Comment
+    private String newCommentText;
     
     /**
      * creates the message and comment lists.
@@ -172,13 +173,6 @@ public class CategoryBean implements Serializable{
         return "";
     }
     
-    public String createMessage() {
-        String s = "category";
-        Message m = new Message(user.getUser(), newMessageTitle , newMessageText);
-        category.addMessage(m);
-        return s;
-    }
-    
     public String getNewCategoryTitle() {
         return newCategoryTitle;
     }
@@ -195,9 +189,34 @@ public class CategoryBean implements Serializable{
         this.newCategoryDesc = newCategoryDesc;
     }
     
-    public String createNewCategory(User user) {
-        Category c = new Category(user, newCategoryTitle, newCategoryDesc);
-        service.addCategory(c);
+    public String createNewCategory() {
+        service.createCategory(user.getUser(), newCategoryTitle, newCategoryDesc);
         return "welcome";
+    }
+    
+    public String getNewMessageTitle() {
+        return newMessageTitle;
+    }
+    
+    public void setNewMessageTitle(String newMessageTitle) {
+        this.newMessageTitle = newMessageTitle;
+    }
+    
+    public String getNewMessageText() {
+        return newMessageText;
+    }
+    
+    public void setNewMessageText(String newMessageText) {
+        this.newMessageText = newMessageText;
+    }
+    
+    public String createMessage() {
+        service.createMessage(category, user.getUser() , newMessageTitle, newMessageText);
+        return "category";
+    }
+    
+    public String createComment() {
+        service.createComment(currentlySelectedMessage, user.getUser(), newCommentText);
+        return "message";
     }
 }
