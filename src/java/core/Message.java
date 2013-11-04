@@ -67,9 +67,7 @@ public class Message {
     }
     
     public void removeAllComments() {
-        for(Comment c: comments) {
-            removeComment(c);
-        }
+        comments = new ArrayList<>();
     }
     
     @Override

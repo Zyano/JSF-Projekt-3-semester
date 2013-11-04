@@ -18,6 +18,7 @@ public class UserBean implements Serializable{
     @Inject
     private Service service;
     
+    
     public String login() {
         User validUser = service.getValidUser(user);
         if(validUser !=null) {
@@ -42,7 +43,7 @@ public class UserBean implements Serializable{
     }
     
     // we need the user object when a category is created.
-    public String createNewCategory() {
-        return service.createNewCategory(user);
+    public boolean isCurrentUser(User user) {
+        return !user.equals(this.user);
     }
 }

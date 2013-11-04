@@ -17,5 +17,18 @@
             <br/>
             <h:commandButton value="Create a new category" action="createCategory" />
         </h:form>
+            <br/>
+            <br/>
+            <br/>
+            <h:form rendered="#{userBean.admin}">
+                <h2>ADMIN PANEL</h2>
+                
+                <h:dataTable value="#{service.users}" var="user" >
+                    <h:column>
+                        <h:commandLink action="#{service.removeUser(user)}" value="Delete #{user.userName}" rendered="#{userBean.isCurrentUser(user)}"/>
+                    </h:column>
+                </h:dataTable>
+                    
+            </h:form>
     </h:body>
 </html>

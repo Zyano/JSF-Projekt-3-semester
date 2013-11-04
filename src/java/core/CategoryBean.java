@@ -24,6 +24,16 @@ public class CategoryBean implements Serializable{
     private Message currentlySelectedMessage;
     @Inject
     private UserBean user;
+    @Inject
+    private Service service;
+    
+    // create Message
+    private String newMessageTitle;
+    private String newMessageText;
+    
+    // create Category
+    private String newCategoryTitle;
+    private String newCategoryDesc;
     
     /**
      * creates the message and comment lists.
@@ -35,7 +45,7 @@ public class CategoryBean implements Serializable{
     
     /**
      * Creates a comment on the currently selected message(news post).
-     * @param text 
+     * @param text
      */
     public void addComment(String text) {
         Comment c = new Comment(user.getUser(), text);
@@ -44,7 +54,8 @@ public class CategoryBean implements Serializable{
     
     /**
      * adds a message(news post) to the currently selected category. admin use case?
-     * @param text 
+     * @param text
+     * @param title
      */
     public void addMessage(String title, String text) {
         category.addMessage(new Message(user.getUser(), title, text));
@@ -52,15 +63,15 @@ public class CategoryBean implements Serializable{
     
     /**
      * for admin usecase if a comment is deleted.
-     * @param comments 
+     * @param comments
      */
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
     
     /**
-     * Admin usecase for deletion of messages(news posts) 
-     * @param messages 
+     * Admin usecase for deletion of messages(news posts)
+     * @param messages
      */
     public void setMessages(List<Message> messages) {
         this.messages = messages;
@@ -109,7 +120,7 @@ public class CategoryBean implements Serializable{
         this.messages = category.getMessages();
         return "category";
     }
-
+    
     /**
      * used on category.xhtml for the link and updates the selectedmessage.
      * @param msg
@@ -120,10 +131,10 @@ public class CategoryBean implements Serializable{
         this.comments = msg.getComments();
         return "message";
     }
-
+    
     /**
      * Should be changed to return the currently selected Category and the amount of submessages.
-     * @return 
+     * @return
      */
     public String categoryToString() {
         return category.toString();
@@ -155,9 +166,38 @@ public class CategoryBean implements Serializable{
     public String getMessageText() {
         return currentlySelectedMessage.getText();
     }
-
+    
     public String deleteComment(Comment comment) {
         currentlySelectedMessage.removeComment(comment);
         return "";
+    }
+    
+    public String createMessage() {
+        String s = "category";
+        Message m = new Message(user.getUser(), newMessageTitle , newMessageText);
+        category.addMessage(m);
+        return s;
+    }
+    
+    public String getNewCategoryTitle() {
+        return newCategoryTitle;
+    }
+    
+    public void setNewCategoryTitle(String newCategoryTitle) {
+        this.newCategoryTitle = newCategoryTitle;
+    }
+    
+    public String getNewCategoryDesc() {
+        return newCategoryDesc;
+    }
+    
+    public void setNewCategoryDesc(String newCategoryDesc) {
+        this.newCategoryDesc = newCategoryDesc;
+    }
+    
+    public String createNewCategory(User user) {
+        Category c = new Category(user, newCategoryTitle, newCategoryDesc);
+        service.addCategory(c);
+        return "welcome";
     }
 }

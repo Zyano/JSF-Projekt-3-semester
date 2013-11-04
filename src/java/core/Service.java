@@ -19,8 +19,6 @@ public class Service {
     private List<Category> categories;
     
     // category creation!
-    private String newCategoryTitle;
-    private String newCategoryDesc;
     
     public Service() {
         users = new ArrayList<>();
@@ -70,6 +68,8 @@ public class Service {
     public void removeUser(User user) {
         if(users.contains(user)) {
             users.remove(user);
+            deleteUser(user);
+            
         }
     }
     
@@ -91,29 +91,45 @@ public class Service {
     
     public void removeCategory(Category c) {
         if(this.categories.contains(c)) {
+            c.removeAllMessages();
             this.categories.remove(c);
+            
         }
     }
 
-    public String getNewCategoryTitle() {
-        return newCategoryTitle;
-    }
+    /**
+     * Triple nested while loop! OP
+     * @param user
+     */
+    public void deleteUser(User user) {
+        if(users.contains(user)) {
+            int i = 0;
+            while(i<categories.size()-1) {
+                Category c = categories.get(i);
+                int j = 0;
+                if(c.getUser().equals(user)) {
+                    removeCategory(c);
+                }  else {
+                    while(j<c.getMessages().size()-1) {
+                        int k = 0;
+                        Message m = c.getMessages().get(j);
+                        if(m.getUser().equals(user)) {
+                            c.removeMessage(m);
+                        } else {
 
-    public void setNewCategoryTitle(String newCategoryTitle) {
-        this.newCategoryTitle = newCategoryTitle;
-    }
-
-    public String getNewCategoryDesc() {
-        return newCategoryDesc;
-    }
-
-    public void setNewCategoryDesc(String newCategoryDesc) {
-        this.newCategoryDesc = newCategoryDesc;
-    }
-    
-    public String createNewCategory(User user) {
-        Category c = new Category(user, newCategoryTitle, newCategoryDesc);
-        categories.add(c);
-        return "welcome";
+                            while(k<m.getComments().size()-1) {
+                                Comment cc = m.getComments().get(k);
+                                if(cc.getUser().equals(user)) {
+                                    m.removeComment(cc);
+                                }
+                                k++;
+                            }
+                            j++;
+                        }
+                    }
+                }
+                i++;
+            }
+        }
     }
 }
