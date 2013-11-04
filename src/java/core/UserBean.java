@@ -40,4 +40,9 @@ public class UserBean implements Serializable{
     public boolean isAdmin() {
         return user.isAdmin();
     }
+    
+    // we need the user object when a category is created.
+    public String createNewCategory() {
+        return service.createNewCategory(user);
+    }
 }

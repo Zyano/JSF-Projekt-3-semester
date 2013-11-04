@@ -12,10 +12,15 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 
 @ApplicationScoped
-@Named(value="servce")
+@Named(value="service")
 public class Service {
+    
     private List<User> users;
     private List<Category> categories;
+    
+    // category creation!
+    private String newCategoryTitle;
+    private String newCategoryDesc;
     
     public Service() {
         users = new ArrayList<>();
@@ -34,8 +39,8 @@ public class Service {
     }
     
     private void createData() {
-        Category c = new Category("IT Realted","It related news, from NSA spying to game releases");
-        Category c2 = new Category("Random", "Anything goes here - random");
+        Category c = new Category(users.get(0),"IT Related","IT related news");
+        Category c2 = new Category(users.get(1),"Random", "Anything goes here - random");
         categories.add(c);
         categories.add(c2);
         Message m = new Message(users.get(0), "Fønik Computers og fortrydelsesretten", "Artikel kommer her");
@@ -88,5 +93,27 @@ public class Service {
         if(this.categories.contains(c)) {
             this.categories.remove(c);
         }
+    }
+
+    public String getNewCategoryTitle() {
+        return newCategoryTitle;
+    }
+
+    public void setNewCategoryTitle(String newCategoryTitle) {
+        this.newCategoryTitle = newCategoryTitle;
+    }
+
+    public String getNewCategoryDesc() {
+        return newCategoryDesc;
+    }
+
+    public void setNewCategoryDesc(String newCategoryDesc) {
+        this.newCategoryDesc = newCategoryDesc;
+    }
+    
+    public String createNewCategory(User user) {
+        Category c = new Category(user, newCategoryTitle, newCategoryDesc);
+        categories.add(c);
+        return "welcome";
     }
 }
