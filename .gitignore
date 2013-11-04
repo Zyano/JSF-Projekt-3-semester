@@ -6,8 +6,11 @@
 *.ear
 
 # NB#
+build/*
 build/
+dist/*
 dist/
+nbproject/*
 nbproject/
 glassfish-web.xml
 web.xml
