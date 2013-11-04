@@ -6,14 +6,11 @@
 *.ear
 
 # NB#
-nbproject/private/*
-build/*
-nbbuild/*
-dist/*
-nbdist/*
-nbactions.xml
-nb-configuration.xml
-
+build/
+dist/
+nbproject/
+glassfish-web.xml
+web.xml
 
 #
 
