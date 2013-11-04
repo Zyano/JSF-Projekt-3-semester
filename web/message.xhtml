@@ -20,7 +20,7 @@
 			<h:column>
 			    <div class="media">
 				<div class="media-body">
-				    <h4 class="media-heading">#{comment.user.userName} - <h:commandButton action="#{category.deleteComment(comment)}" rendered="#{userBean.admin}" value="REMOVE THAT SHIT" p:class="btn btn-danger btn-xs" /></h4>
+				    <h4 class="media-heading">#{comment.user.userName} <h:commandButton action="#{category.deleteComment(comment)}" rendered="#{userBean.admin}" value="REMOVE THAT SHIT" p:class="btn btn-danger btn-xs" /></h4>
 				    <p>#{comment}</p>
 				</div>
 			    </div>
