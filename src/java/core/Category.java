@@ -35,6 +35,7 @@ public class Category {
             for (Message m : messages) {
                 m.removeAllComments();
             }
+            messages = new ArrayList<>();
         }
     }
     
