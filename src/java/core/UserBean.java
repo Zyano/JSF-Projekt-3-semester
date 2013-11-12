@@ -8,8 +8,10 @@ package core;
 
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 @SessionScoped
 @Named(value="userBean")
@@ -45,5 +47,11 @@ public class UserBean implements Serializable{
     // we need the user object when a category is created.
     public boolean isCurrentUser(User user) {
         return !user.equals(this.user);
+    }
+    
+    public String logout() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        session.invalidate();
+        return "index";
     }
 }
